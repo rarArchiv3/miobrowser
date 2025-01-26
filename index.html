@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
-  <title>MioBrowser 1</title>
+  <title>MioBrowser</title>
   <style>
     body {
       margin: 0;
@@ -131,7 +131,7 @@
   </style>
 </head>
 <body>
-  <h1>MioBrowser</h1>
+  <h1>MioBrowser 2</h1>
   <div class="input-container">
     <input type="text" id="siteUrl" placeholder="Введите URL сайта" />
     <button onclick="saveSite()">Сохранить</button>
@@ -206,7 +206,6 @@
       siteButton.href = url;
       siteButton.textContent = name;
       siteButton.className = 'site-button';
-      siteButton.target = '_blank';  // Открывать ссылку в новой вкладке
       siteItem.appendChild(siteButton);
 
       if (deletable) {
@@ -230,8 +229,8 @@
         event.preventDefault(); // Отменяем стандартное открытие ссылки
         const url = target.href;
 
-        // Попробуем открыть ссылку в новой вкладке (или в приложении, если оно установлено)
-        window.open(url, '_blank');
+        // Открываем ссылку внутри приложения или игры
+        window.location.href = url; // Это откроет ссылку внутри того же окна
       }
     });
   </script>
