@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
   <title>MioBrowser</title>
   <style>
     body {
@@ -84,7 +86,7 @@
       text-align: center;
       display: block;
       padding: 10px;
-      width: 100%; /* Кнопка по всей ширине */
+      width: 100%;
       box-sizing: border-box;
       transition: background-color 0.3s, transform 0.1s;
     }
@@ -202,7 +204,9 @@
 
       const siteButton = document.createElement('a');
       siteButton.href = url;
-      siteButton.textContent = name;siteButton.className = 'site-button';
+      siteButton.textContent = name;
+      siteButton.className = 'site-button';
+      siteButton.target = '_blank';  // Открывать ссылку в новой вкладке
       siteItem.appendChild(siteButton);
 
       if (deletable) {
@@ -218,6 +222,18 @@
 
     // Загрузка сохраненных сайтов при загрузке страницы
     loadSites();
+
+    // Обработчик кликов по ссылкам, чтобы контролировать открытие
+    document.body.addEventListener('click', function(event) {
+      const target = event.target;
+      if (target.tagName.toLowerCase() === 'a') {
+        event.preventDefault(); // Отменяем стандартное открытие ссылки
+        const url = target.href;
+
+        // Попробуем открыть ссылку в новой вкладке (или в приложении, если оно установлено)
+        window.open(url, '_blank');
+      }
+    });
   </script>
 </body>
 </html>
